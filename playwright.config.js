@@ -1,10 +1,18 @@
 // playwright.config.js
-
 module.exports = {
+    testDir: 'tests',
+    timeout: 30000,
+    expect: {
+        timeout: 5000,
+    },
+    fullyParallel: true,
+    retries: 1,
+    workers: 2,
+    reporter: [['html', { outputFolder: 'test-results' }]],
     use: {
-    //  baseURL: 'http://localhost:8080',
-      headless: true,  // Set to false if you want to see the browser UI
-      timeout: 30000,  // Test timeout in milliseconds
+        headless: true,
+        screenshot: 'only-on-failure',
+        video: 'on',
     },
   };
   

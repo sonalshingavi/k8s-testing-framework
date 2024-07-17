@@ -1,7 +1,7 @@
 // test.js
 
 const { test, expect } = require('@playwright/test');
-const backendUrl = 'http://localhost:8081/greet';  // Adjust this to your actual backend endpoint
+const backendUrl = 'http://localhost:9090/greet';  // Adjust this to your actual backend endpoint
 const frontendUrl = 'http://localhost:8080';  // Adjust this to your actual frontend URL
 
 test('Frontend should display the message from the backend', async ({ page }) => {
