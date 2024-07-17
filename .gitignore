@@ -1,0 +1,12 @@
+# Node modules directory
+node_modules/
+
+# Dependency directories
+package-lock.json
+
+# Playwright test results directory
+test-results/
+
+# npm package lock file
+package-lock.json
+
