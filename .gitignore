@@ -10,3 +10,5 @@ test-results/
 # npm package lock file
 package-lock.json
 
+#clone git repo
+qa-test
