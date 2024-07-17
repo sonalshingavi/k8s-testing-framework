@@ -7,8 +7,8 @@ package-lock.json
 # Playwright test results directory
 test-results/
 
-# npm package lock file
+# npm package-lock file
 package-lock.json
 
-#clone git repo
+# cloned git repo
 qa-test
