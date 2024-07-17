@@ -32,14 +32,47 @@ chmod +x scripts/setup.sh
 ```
 
 This script performs the following actions:
+##### 1. Clone the Repository
+First, clone this repository to your local machine:
 
-1. Clones the repository: Retrieves the latest code from GitHub.
-2. Sets up Kind cluster: Creates a local Kubernetes cluster using Kind.
-3. Builds Docker images: Builds Docker images for frontend and backend services.
-4. Applies Kubernetes configurations: Deploys the services to the Kind cluster.
-5. Port forwards: Forward ports from the Kind cluster to the local machine to access the services.
-Keep the terminal open to keep port forwarding active.
+```bash
+git clone https://github.com/Vengatesh-m/qa-test
+cd qa-test
+```
 
+##### 2. Set Up Kind Cluster
+
+```bash
+kind create cluster
+```
+
+##### 3. Build and Push Docker Images
+
+```bash
+# Build the Docker images
+docker build -t backend:v1 -f backend/Dockerfile .
+docker build -t frontend:v1 -f frontend/Dockerfile .
+
+# Load images into the Kind cluster
+kind load docker-image backend:v1
+kind load docker-image frontend:v1
+```
+##### 4. Apply the Kubernetes Configurations
+
+```bash
+kubectl apply -f Deployment/backend-deployment.yaml
+kubectl apply -f Deployment/frontend-deployment.yaml
+```
+
+##### 5. Port Forward for Frontend Service and Backend Service
+ keep the terminal open to keep port forwarding active.
+```bash
+# Port forward for the backend service
+kubectl port-forward service/backend-service 9090:3000
+
+# Open another terminal and set up a port forward for the frontend service
+kubectl port-forward service/frontend-service 8080:80
+```
 
 ### 2. Run Playwright Tests
 Once the setup.sh script is running and port forwarding is active, you can execute the Playwright tests.
@@ -49,7 +82,7 @@ Once the setup.sh script is running and port forwarding is active, you can execu
 npx playwright test
 
 ```
-### Generate HTML Report
+#### Generate HTML Report
 
 After running the Playwright tests, an HTML report can be generated to view detailed test results and summaries.
 
