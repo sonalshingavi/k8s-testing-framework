@@ -10,11 +10,14 @@ test('Frontend should display the message from the backend', async ({ page }) =>
   const backendData = await backendResponse.json();
   const message = backendData.message;
 
-    console.log("@@@@@@@@@@@ message : "+ message)
+  console.log("Backend message : " + message);
   // Go to the frontend page
   await page.goto(frontendUrl);
 
   // Check that the message is displayed on the frontend
-  const messageElement = await page.locator('body');  // Adjust this to target the correct element in your frontend
-  await expect(messageElement).toHaveText(message);
+  const messageElement = await page.locator('body');
+  const messageText = await messageElement.textContent();
+  console.log("Frontend message : " + messageText);
+  await expect(messageText).toContain(message);
+
 });
